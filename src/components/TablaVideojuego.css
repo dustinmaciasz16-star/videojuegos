@@ -1,57 +1,121 @@
-.tabla-container {
-    width: 100%;
+/* Contenedor de la tabla */
+.tabla-container{
+    width: 95%;
+    margin: 40px auto;
     overflow-x: auto;
-    margin-top: 20px;
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 18px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.45);
+    padding: 20px;
 }
 
-.tabla-videojuegos {
+/* Tabla */
+.tabla-videojuegos{
     width: 100%;
     border-collapse: collapse;
-    background-color: #ffffff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.tabla-videojuegos thead {
-    background-color: #2563eb;
     color: white;
+    overflow: hidden;
 }
 
-.tabla-videojuegos th,
-.tabla-videojuegos td {
-    padding: 14px;
-    text-align: center;
-    border-bottom: 1px solid #e5e7eb;
+/* Encabezado */
+.tabla-videojuegos thead{
+    background: linear-gradient(135deg,#2563eb,#38bdf8);
 }
 
-.tabla-videojuegos tbody tr:nth-child(even) {
-    background-color: #f8fafc;
-}
-
-.tabla-videojuegos tbody tr:hover {
-    background-color: #dbeafe;
-    transition: background-color 0.3s ease;
-}
-
-.tabla-videojuegos th {
+.tabla-videojuegos th{
+    padding: 16px;
+    font-size: 16px;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-progress {
-    width: 100%;
+/* Celdas */
+.tabla-videojuegos td{
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+/* Filas */
+.tabla-videojuegos tbody tr{
+    transition: .3s;
+}
+
+/* Filas alternadas */
+.tabla-videojuegos tbody tr:nth-child(even){
+    background: rgba(255,255,255,.04);
+}
+
+/* Hover */
+.tabla-videojuegos tbody tr:hover{
+    background: rgba(56,189,248,.18);
+    transform: scale(1.01);
+}
+
+/* Barra de progreso */
+progress{
+    width: 120px;
     height: 18px;
+    accent-color: #38bdf8;
 }
 
-@media (max-width: 768px) {
+/* Botones */
+.tabla-videojuegos button{
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .3s;
+    margin: 3px;
+}
+
+/* Editar */
+.tabla-videojuegos button:first-child{
+    background: linear-gradient(135deg,#2563eb,#38bdf8);
+}
+
+.tabla-videojuegos button:first-child:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(37,99,235,.45);
+}
+
+/* Eliminar */
+.tabla-videojuegos button:last-child{
+    background: linear-gradient(135deg,#dc2626,#ef4444);
+}
+
+.tabla-videojuegos button:last-child:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(220,38,38,.45);
+}
+
+/* Responsive */
+@media (max-width: 768px){
+
+    .tabla-container{
+        width: 98%;
+        padding: 10px;
+    }
 
     .tabla-videojuegos th,
-    .tabla-videojuegos td {
+    .tabla-videojuegos td{
         padding: 10px;
         font-size: 14px;
     }
 
-    progress {
+    progress{
+        width: 80px;
         height: 14px;
+    }
+
+    .tabla-videojuegos button{
+        width: 100%;
+        margin: 5px 0;
+        font-size: 13px;
     }
 }

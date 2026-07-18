@@ -1,28 +1,102 @@
-* {
+/* Reset */
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f6f9;
-    color: #333;
-}
-
-#root {
+/* Página */
+body{
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg,#0f172a,#1e293b,#111827);
+    color: white;
     min-height: 100vh;
 }
 
-.app {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
+/* Scroll personalizado */
+::-webkit-scrollbar{
+    width: 10px;
 }
 
-.app h1 {
+::-webkit-scrollbar-track{
+    background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb{
+    background: #2563eb;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: #38bdf8;
+}
+
+/* Root */
+#root{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contenedor principal */
+.app{
+    width: 95%;
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 20px;
+    animation: aparecer .6s ease;
+}
+
+/* Título */
+.app h1{
     text-align: center;
-    color: #1e3a8a;
     margin-bottom: 30px;
-    font-size: 2rem;
+    font-size: 40px;
+    color: white;
+    text-shadow: 0 0 15px rgba(56,189,248,.6);
+}
+
+/* Tarjetas */
+.card{
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.45);
+}
+
+/* Separación entre componentes */
+section{
+    margin-top: 30px;
+}
+
+/* Animación */
+@keyframes aparecer{
+
+    from{
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* Responsive */
+@media(max-width:768px){
+
+    .app{
+        width: 95%;
+        margin: 20px auto;
+        padding: 10px;
+    }
+
+    .app h1{
+        font-size: 28px;
+    }
+
 }

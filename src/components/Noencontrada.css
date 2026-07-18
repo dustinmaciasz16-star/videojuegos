@@ -1,0 +1,101 @@
+/* Contenedor principal */
+.no-encontrada{
+    width: 90%;
+    max-width: 700px;
+    margin: 80px auto;
+    padding: 50px;
+    text-align: center;
+
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.45);
+
+    animation: aparecer .7s ease;
+}
+
+/* Código del error */
+.no-encontrada h1{
+    font-size: 120px;
+    margin: 15px 0;
+    font-weight: 800;
+
+    background: linear-gradient(135deg,#2563eb,#38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow: 0 0 25px rgba(56,189,248,.4);
+}
+
+/* Título */
+.no-encontrada h2{
+    color: white;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+/* Descripción */
+.no-encontrada p{
+    color: #cbd5e1;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* Botón */
+.no-encontrada a{
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 10px;
+
+    background: linear-gradient(135deg,#2563eb,#38bdf8);
+
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+
+    transition: .3s;
+}
+
+.no-encontrada a:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(37,99,235,.45);
+}
+
+/* Animación */
+
+@keyframes aparecer{
+
+    from{
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .no-encontrada{
+        padding: 35px 20px;
+    }
+
+    .no-encontrada h1{
+        font-size: 80px;
+    }
+
+    .no-encontrada h2{
+        font-size: 24px;
+    }
+
+    .no-encontrada p{
+        font-size: 16px;
+    }
+
+}

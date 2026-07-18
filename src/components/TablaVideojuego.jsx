@@ -1,6 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import "./TablaVideojuego.css";
 
-function TablaVideojuegos({ videojuegos }) {
+function TablaVideojuegos({ videojuegos, onEliminar }) {
+
+    const navigate = useNavigate();
+
+    function manejarEditar(videojuego) {
+        navigate("/editar", {
+            state: { juego: videojuego }
+        });
+    }
+
     return (
         <div className="tabla-container">
             <table className="tabla-videojuegos">
@@ -13,6 +23,7 @@ function TablaVideojuegos({ videojuegos }) {
                         <th>Precio</th>
                         <th>Disponible</th>
                         <th>Progreso</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
 
@@ -28,12 +39,22 @@ function TablaVideojuegos({ videojuegos }) {
                             <td>
                                 <progress
                                     value={juego.progreso}
-                                    max="1"
+                                    max="100"
                                 ></progress>
 
                                 <br />
 
-                                {(juego.progreso * 100).toFixed(0)}%
+                                {juego.progreso}%
+                            </td>
+
+                            <td>
+                                <button onClick={() => manejarEditar(juego)}>
+                                    Editar
+                                </button>
+
+                                <button onClick={() => onEliminar(juego.id)}>
+                                    Eliminar
+                                </button>
                             </td>
                         </tr>
                     ))}

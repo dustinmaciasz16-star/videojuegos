@@ -1,0 +1,25 @@
+.toast{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(34,197,94,.95);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 12px 30px rgba(0,0,0,.35);
+    animation: aparecer .4s ease;
+    z-index: 9999;
+}
+
+@keyframes aparecer{
+    from{
+        opacity:0;
+        transform: translateX(100px);
+    }
+
+    to{
+        opacity:1;
+        transform: translateX(0);
+    }
+}

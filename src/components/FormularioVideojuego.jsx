@@ -16,6 +16,9 @@ function FormularioVideojuego({ onGuardar }) {
     const [precio, setPrecio] = useState("");
     const [disponible, setDisponible] = useState(false);
     const [progreso, setProgreso] = useState(0);
+    const [sinopsis, setSinopsis] = useState("");
+    const [calificacion, setCalificacion] = useState("");
+    const [errores, setErrores] = useState({});
 
     useEffect(() => {
         if (videojuegoRecuperado) {
@@ -26,6 +29,8 @@ function FormularioVideojuego({ onGuardar }) {
             setPrecio(videojuegoRecuperado.precio);
             setDisponible(videojuegoRecuperado.disponible);
             setProgreso(videojuegoRecuperado.progreso);
+            setSinopsis(videojuegoRecuperado.sinopsis || "");
+            setCalificacion(videojuegoRecuperado.calificacion || "");
         } else {
             setTitulo("");
             setGenero("");
@@ -34,16 +39,53 @@ function FormularioVideojuego({ onGuardar }) {
             setPrecio("");
             setDisponible(false);
             setProgreso(0);
+            setSinopsis("");
+            setCalificacion("");
         }
     }, [videojuegoRecuperado]);
 
+    function validarFormulario() {
+        const erroresActivos = {};
+
+        if (titulo.trim() === "") {
+            erroresActivos.titulo = "El título es obligatorio.";
+        }
+        if (genero.trim() === "") {
+            erroresActivos.genero = "El género es obligatorio.";
+        }
+        if (plataforma === "") {
+            erroresActivos.plataforma = "Seleccione una plataforma.";
+        }
+        if (precio === "" || precio <= 0) {
+            erroresActivos.precio = "Ingrese un precio válido.";
+        }
+        if (sinopsis.trim().length < 10) {
+            erroresActivos.sinopsis =
+                "La sinopsis debe tener mínimo 10 caracteres.";
+        }
+        if (calificacion < 1 || calificacion > 100) {
+            erroresActivos.calificacion =
+                "La calificación debe estar entre 1 y 100.";
+        }
+
+        const hoy = new Date().toISOString().split("T")[0];
+        if (lanzamiento > hoy) {
+            erroresActivos.lanzamiento =
+                "La fecha no puede ser futura.";
+        }
+        return erroresActivos;
+    }
+
     function manejarGuardar(e) {
         e.preventDefault();
-
+        const erroresActivos = validarFormulario();
+        if (Object.keys(erroresActivos).length > 0) {
+            setErrores(erroresActivos);
+            return;
+        }
+        setErrores({});
         const videojuego = {
-            id: videojuegoRecuperado
-                ? videojuegoRecuperado.id
-                : Date.now(),
+            id: videojuegoRecuperado ? videojuegoRecuperado.id: Date.now(),
             titulo,
             genero,
             plataforma,
@@ -51,8 +93,9 @@ function FormularioVideojuego({ onGuardar }) {
             precio,
             disponible,
             progreso,
+            sinopsis,
+            calificacion
         };
-
         onGuardar(videojuego);
         navigate("/");
     }
@@ -75,6 +118,10 @@ function FormularioVideojuego({ onGuardar }) {
                 onChange={(e) => setTitulo(e.target.value)}
                 placeholder="Ingrese el título del videojuego"
             />
+            {errores.titulo &&
+            <span className="error-mensaje">
+                {errores.titulo}
+            </span>}
 
             <label htmlFor="genero">Género:</label>
             <input
@@ -84,6 +131,10 @@ function FormularioVideojuego({ onGuardar }) {
                 onChange={(e) => setGenero(e.target.value)}
                 placeholder="Ingrese el género del videojuego"
             />
+            {errores.genero &&
+            <span className="error-mensaje">
+                {errores.genero}
+            </span>}
 
             <label htmlFor="plataforma">Plataforma:</label>
             <select
@@ -97,6 +148,10 @@ function FormularioVideojuego({ onGuardar }) {
                 <option value="Xbox">Xbox</option>
                 <option value="Nintendo Switch">Nintendo Switch</option>
             </select>
+            {errores.plataforma &&
+            <span className="error-mensaje">
+                {errores.plataforma}
+            </span>}
 
             <label htmlFor="lanzamiento">Lanzamiento:</label>
             <input
@@ -105,6 +160,10 @@ function FormularioVideojuego({ onGuardar }) {
                 value={lanzamiento}
                 onChange={(e) => setLanzamiento(e.target.value)}
             />
+            {errores.lanzamiento &&
+            <span className="error-mensaje">
+                {errores.lanzamiento}
+            </span>}
 
             <label htmlFor="precio">Precio:</label>
             <input
@@ -120,6 +179,41 @@ function FormularioVideojuego({ onGuardar }) {
                 }
                 placeholder="Ingrese el precio del videojuego"
             />
+            {errores.precio &&
+            <span className="error-mensaje">
+                {errores.precio}
+            </span>}
+
+            <label htmlFor="sinopsis">
+                Sinopsis:
+            </label>
+            <textarea
+                id="sinopsis"
+                value={sinopsis}
+                onChange={(e)=>setSinopsis(e.target.value)}
+                rows="5"
+                placeholder="Escriba una breve descripción del videojuego"
+            />
+            {errores.sinopsis &&
+            <span className="error-mensaje">
+                {errores.sinopsis}
+            </span>}
+
+            <label htmlFor="calificacion">
+                Calificación:
+            </label>
+            <input
+                type="number"
+                id="calificacion"
+                value={calificacion}
+                min="1"
+                max="100"
+                onChange={(e)=>setCalificacion(Number(e.target.value))}
+            />
+            {errores.calificacion &&
+            <span className="error-mensaje">
+                {errores.calificacion}
+            </span>}
 
             <label htmlFor="disponible">Disponible:</label>
             <input
